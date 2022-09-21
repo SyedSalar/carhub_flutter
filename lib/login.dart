@@ -1,10 +1,18 @@
+import 'package:carhub/counter.dart';
 import 'package:carhub/homepage.dart';
 import 'package:carhub/mydrawer.dart';
 import 'package:carhub/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  String uid = '';
+  String upwd = '';
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
@@ -48,6 +56,11 @@ class Login extends StatelessWidget {
                   child: Column(
                     children: [
                       TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              uid = value;
+                            });
+                          },
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "Username...",
@@ -66,6 +79,11 @@ class Login extends StatelessWidget {
                         height: 20,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            upwd = value;
+                          });
+                        },
                         style: TextStyle(color: Colors.white),
                         obscureText: true,
                         decoration: InputDecoration(
@@ -106,10 +124,14 @@ class Login extends StatelessWidget {
                           height: 30.0,
                           child: ElevatedButton(
                             onPressed: (() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => MyHomePage())));
+                              if (uid == 'abc' && upwd == '123') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) => MyCounter())));
+                              } else
+                                (Text(
+                                    'Please enter correct Username or password!'));
                             }),
                             child: Text(
                               "Sign In",
